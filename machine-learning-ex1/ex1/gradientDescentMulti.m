@@ -17,9 +17,10 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
-
-
+    theta = theta - (X' * (X * theta - y) * alpha / m);
+    % theta = theta - F
+    % F = alpha * J(thete)对thede的微分
+    % J对thete的偏微分 = sum(h(X(i)) - y(i))/ m
 
 
 
