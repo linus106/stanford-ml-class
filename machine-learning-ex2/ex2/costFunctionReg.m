@@ -17,6 +17,12 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+[J, grad] = costFunction(theta, X, y); %regularized regression is similar to basic, reuse basic function
+
+thetaExcludeZero = theta(2:size(theta));
+
+J = J + sum(thetaExcludeZero .^ 2) * lambda * 0.5 / m; % + (lambda / 2m) * sum(theta^2) exclude theta0
+grad = grad + [0 ; thetaExcludeZero] * lambda / m ; % + theta * lambda / m exclude theta0
 
 
 
