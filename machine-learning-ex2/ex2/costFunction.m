@@ -19,11 +19,11 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
+z = X * theta; % calc theta' * X
+h = sigmoid(z); % calc hypothesis
 
-
-
-
-
+J = (y' * -log(h) + (1-y)' * -log(1 - h)) / m; % (sum(y * -log(h) + (1-y) * - log(1 - h))) * (1/m)
+grad = X' * (h - y) / m; % a feature-number size vector of sum((h(x) - y) * x) / m
 
 
 
