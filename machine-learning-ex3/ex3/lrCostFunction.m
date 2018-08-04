@@ -36,12 +36,16 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+z = X * theta; % calc theta' * X
+h = sigmoid(z); % calc hypothesis
 
+thetaExcludeZero = theta(2:size(theta));
 
+J1 = (y' * -log(h) + (1-y)' * -log(1 - h)) / m; % (sum(y * -log(h) + (1-y) * - log(1 - h))) * (1/m)
+J2 = sum(thetaExcludeZero .^ 2) * lambda * 0.5 / m; % + (lambda / 2m) * sum(theta^2) exclude theta0
+J = J1 + J2;
 
-
-
-
+grad = (X' * (h - y) / m) + ([0 ; thetaExcludeZero] * lambda / m) ; % (a feature-number size vector of sum((h(x) - y) * x) / m )+ (theta * lambda / m exclude theta0)
 
 
 

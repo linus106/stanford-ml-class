@@ -33,8 +33,10 @@ X = [ones(m, 1) X];
 
 
 
+[maxP , p] = max(sigmoid(X * all_theta'), [], 2);
 
-
+%find(p==10)
+%p = mod(p ,10); % p is class ,not actual number
 
 % =========================================================================
 
