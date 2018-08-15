@@ -65,28 +65,32 @@ Theta2_grad = zeros(size(Theta2));
 % init Y
 I = eye(num_labels);
 Y = zeros(m, num_labels);
-for i=1:m
+for i = 1:m
   Y(i, :)= I(y(i), :);
 end
 
 % calc hypothesis
-z2 = [ones(m, 1), X] * Theta1';   %A(n+1) = g(A(n) * theta(n) ) ,A(n) should plus one colum
-A2 = sigmoid(z2);
-z3 = [ones(m, 1), A2] * Theta2';
-h = sigmoid(z3);
+A1 = [ones(m, 1) X];
+Z2 = A1 * Theta1';
+A2 = [ones(size(Z2, 1), 1) sigmoid(Z2)];
+Z3 = A2 * Theta2';
+H = A3 = sigmoid(Z3);
 
 % calc regularized cost (similar to Regularized Logisic Regression, ex3)
-J1 = sum(sum((Y .* -log(h) + (1 - Y) .* -log(1 - h)), 2)) / m;
+J1 = sum(sum((Y .* -log(H) + (1 - Y) .* -log(1 - H)), 2)) / m;
 J2 = (sum(sum(Theta1(:, 2:end) .^ 2, 2)) + sum(sum(Theta2(:, 2:end) .^ 2, 2))) * lambda * 0.5 / m;
 J = J1 + J2;
 
 %pause;
 
+delta3 = A3 - Y;
+delta2 = (delta3 * Theta2 .* sigmoidGradient([ones(size(Z2, 1), 1) Z2]))(:, 2:end);
 
+Delta1 = delta2' * A1;
+Delta2 = delta3' * A2;
 
-
-
-
+Theta1_grad = Delta1./m + (lambda/m)*[zeros(size(Theta1,1), 1), Theta1(:, 2:end)];
+Theta2_grad = Delta2./m + (lambda/m)*[zeros(size(Theta2,1), 1), Theta2(:, 2:end)];
 
 
 
