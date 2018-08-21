@@ -23,7 +23,7 @@ grad = zeros(size(theta));
 thetaExcludeZero = theta(2:size(theta));
 
 J = sum((X * theta - y) .^ 2) / (2 * m) + sum(thetaExcludeZero .^ 2) * lambda / (2 * m);
-grad = X' * (X * theta - y) / m + [0 ; thetaExcludeZero] * lambda / m ; % a feature-number size vector of sum((h(x) - y) * x) / m
+grad = X' * (X * theta - y) / m + [0 ; thetaExcludeZero] * lambda / m ;
 
 
 
