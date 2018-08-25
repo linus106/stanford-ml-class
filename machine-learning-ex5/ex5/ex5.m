@@ -164,7 +164,7 @@ pause;
 %  lambda to see how the fit and learning curve change.
 %
 
-lambda = 0;% also try 1,100
+lambda = 3;% also try 1,100;3 is best for cross validation dataset
 [theta] = trainLinearReg(X_poly, y, lambda);
 
 % Plot training data and fit
