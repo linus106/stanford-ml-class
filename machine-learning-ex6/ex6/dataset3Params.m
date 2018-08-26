@@ -24,10 +24,20 @@ sigma = 0.3;
 %
 
 
+candidates = [0.01 0.03 0.1 0.3 1 3 10 30];
+error_min = inf;
 
-
-
-
+for C_temp = candidates
+    for sigma_temp = candidates
+        model = svmTrain(X, y, C_temp, @(x1, x2) gaussianKernel(x1, x2, sigma_temp));
+        err = mean(double(svmPredict(model, Xval) ~= yval));
+        if(err <= error_min)
+            C = C_temp;
+            sigma = sigma_temp;
+            error_min   = err;
+        end
+    end
+end
 
 % =========================================================================
 
