@@ -21,7 +21,7 @@ homework and notes for stanford machine learning class by octave
 
 ## notes
 
-![framework](notes\机器学习框架.png)
+![framework](notes/机器学习框架.png)
 
 [01-绪论](notes/01-绪论.md)
 
